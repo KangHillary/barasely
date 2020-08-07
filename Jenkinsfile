@@ -88,7 +88,7 @@ pipeline {
         stage('Build') {
             steps {
 //                 echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL} and job name ${env.JOB_NAME} ${params.Greeting} node name ${env.NODE_NAME}"
-                    sh -c "docker-compose --project-name credit_bank up -d"
+                    sh "docker-compose --project-name credit_bank up -d"
 //                  sh 'virtualenv --no-site-packages .'
 
             }
