@@ -112,6 +112,7 @@ pipeline {
                                         currentBuild.result = 'FAILURE'
                                     }
                                     finally {
+                                    echo "no error was found"
                                         junit 'reports/junit.xml'
 
                                         if (testsError) {
