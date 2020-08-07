@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+
+                echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL}"
+
 
             }
         }
@@ -17,11 +19,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
 
-               step{
-               def username = 'Kangogo'
-                echo 'Hello Mr. ${username}'
-                echo "I said, Hello Mr. ${username}"
-               }
+
 
             }
         }
