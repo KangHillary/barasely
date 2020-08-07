@@ -86,23 +86,18 @@ pipeline {
 
     stages {
         stage('Build') {
+            steps {
 
-                withEnv(["PATH=$PATH:~/.local/bin"]){
+              withEnv(["PATH=$PATH:~/.local/bin"]){
                     sh "docker-compose --project-name credit_bank up -d"
                 }
 
-//             steps {
-//
-//                         withEnv(["PATH=$PATH:~/.local/bin"]){
+
+//                 echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL} and job name ${env.JOB_NAME} ${params.Greeting} node name ${env.NODE_NAME}"
 //                     sh "docker-compose --project-name credit_bank up -d"
-//                 }
-//
-//
-// //                 echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL} and job name ${env.JOB_NAME} ${params.Greeting} node name ${env.NODE_NAME}"
-// //                     sh "docker-compose --project-name credit_bank up -d"
-// //                  sh 'virtualenv --no-site-packages .'
-//
-//             }
+//                  sh 'virtualenv --no-site-packages .'
+
+            }
 
         }
         stage('Test') {
