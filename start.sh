@@ -1,5 +1,5 @@
 #!/bin/sh
 echo "Starting the tests ..."
-python manage.py test
+python3 manage.py test
 echo "completed tests..."
 exec "$@"
