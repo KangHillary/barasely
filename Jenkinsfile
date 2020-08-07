@@ -96,11 +96,17 @@ pipeline {
         }
         stage('Test') {
             steps {
-               echo 'Testing..'
-               sh "./start.sh"
-//                sh 'docker-compose run web sh -c "python3 manage.py jenkins"'
-               echo 'test completed....'
-                sh "start.sh"
+
+            sh label: '', script: '''#!/bin/sh
+            echo "Starting the tests ..."
+            python manage.py jenkins'''
+
+
+//                echo 'Testing..'
+//                sh "./start.sh"
+// //                sh 'docker-compose run web sh -c "python3 manage.py jenkins"'
+//                echo 'test completed....'
+//                 sh "start.sh"
 //                  sh '''
 //                         source bin/activate
 //                         pip install -r requirements.txt
