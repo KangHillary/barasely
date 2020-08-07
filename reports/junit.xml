@@ -1,0 +1,5 @@
+<testsuite name="Django Project Tests" errors="0" failures="1" skips="0" tests="1" time="0.001"><testcase time="0.000054" classname="authentication.tests.PrivateTes" name="test_ongeza"><failure type="builtins.AssertionError" message="10 != 13">Traceback (most recent call last):
+  File "/Users/hillarychepsergon/Documents/Training/Tutorials/creditstaff/barasely/authentication/tests.py", line 9, in test_ongeza
+    self.assertEqual(x, 13)
+AssertionError: 10 != 13
+</failure></testcase></testsuite>

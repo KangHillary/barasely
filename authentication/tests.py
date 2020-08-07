@@ -6,4 +6,4 @@ class PrivateTes(TestCase):
 
     def test_ongeza(self):
         x = ongeza(2,8)
-        self.assertEqual(x, 10)
+        self.assertEqual(x, 13)
