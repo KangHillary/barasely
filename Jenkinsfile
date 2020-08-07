@@ -96,7 +96,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-sh 'python --version'
+            sh 'python manage.py test'
 
 
 
