@@ -9,15 +9,15 @@ pipeline {
         stage('Build') {
             steps {
 //                 echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL} and job name ${env.JOB_NAME} ${params.Greeting} node name ${env.NODE_NAME}"
-                    sh "docker-compose --project-name credit_bank up -d"
+//                     sh "docker-compose --project-name credit_bank up -d"
 
             }
 
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
-//                 sh "./start.sh"
+//                echo 'Testing..' ech
+                sh "./start.sh"
             }
         }
         stage('Deploy') {
