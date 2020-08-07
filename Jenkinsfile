@@ -84,13 +84,17 @@ pipeline {
         timestamps()
       }
 
+    environment {
+        PATH = "$PATH:/usr/local/bin"
+    }
     stages {
         stage('Build') {
             steps {
+            sh "docker-compose --project-name credit_bank up -d"
 
-              withEnv(["PATH=$PATH:~/.local/bin"]){
-                    sh "docker-compose --project-name credit_bank up -d"
-                }
+//               withEnv(["PATH=$PATH:~/.local/bin"]){
+//                     sh "docker-compose --project-name credit_bank up -d"
+//                 }
 
 
 //                 echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL} and job name ${env.JOB_NAME} ${params.Greeting} node name ${env.NODE_NAME}"
