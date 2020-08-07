@@ -109,27 +109,25 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
+         def testsError = null
+        try {
+            sh '''
 
-                   def testsError = null
-                try {
-                    sh '''
-                        python  manage.py jenkins
-                       '''
-                }
-                catch(err) {
-                    testsError = err
-                    currentBuild.result = 'FAILURE'
-                }
-                finally {
-                    junit 'reports/junit.xml'
+                python manage.py jenkins
 
-                    if (testsError) {
-                        throw testsError
-                    }
-                }
+               '''
+        }
+        catch(err) {
+            testsError = err
+            currentBuild.result = 'FAILURE'
+        }
+        finally {
+            junit 'reports/junit.xml'
 
+            if (testsError) {
+                throw testsError
             }
+        }
         }
     }
 
