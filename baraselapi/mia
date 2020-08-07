@@ -1,0 +1,43 @@
+properties([
+  buildDiscarder(
+    logRotator(
+      artifactDaysToKeepStr: '',
+      artifactNumToKeepStr: '',
+      daysToKeepStr: '1',
+      numToKeepStr: '1'
+    )
+  )
+])
+
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          def version = sh(
+            returnStdout: true,
+            script: """
+            grep -o 'version: .*,' mix.exs | sed 's/version: "\\(.*\\)",/\\1/'
+            """
+          ).trim()
+          def tag = "${version}-${env.BUILD_NUMBER}"
+          echo "Building version ${version}"
+          withEnv(["PATH+EXTRA=."]) {
+            sh """
+              make TAG=${tag} publish\\
+              && git tag -am 'New release build' ${tag}\\
+              && git push origin ${tag}
+            """
+          }
+          rancher confirm: true, credentialId: 'rancher',
+                  endpoint: "${RANCHER_ENDPOINT}",
+                  environmentId: "${RANCHER_PROJECT_ID}",
+                  environments: '', ports: '', timeout: 180,
+                  image: "${DOCKER_PEGB_REGISTRY}/velocity-portal:${tag}",
+                  service: 'velocity-portal/velocity-portal'
+        }
+      }
+    }
+  }
+}

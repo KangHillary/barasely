@@ -1,0 +1,55 @@
+pipeline {
+  agent { label 'build-agent02.pegb.tech' }
+  triggers {
+    bitbucketPush()
+  }
+  options {
+    disableConcurrentBuilds()
+    timestamps()
+  }
+  stages {
+    stage ('Setup') {
+      steps {
+        sh "docker-compose --project-name velocity_portal up -d"
+      }
+    }
+
+    stage('Test') {
+      agent {
+        docker {
+          label 'build-argent02.pegb.tech'
+          image '192.168.36.102:5000/pegb-elixir:1.9.0-1'
+          reuseNode true
+          args " \
+                -u root:root \
+                -v /var/lib/jenkins/.ssh:/root/.ssh \
+                -v /var/lib/jenkins/.ssh:/root/keyforci \
+                --net=velocity_portal_global \
+          "
+        }
+      }
+      steps {
+        sh 'mix local.rebar --force'
+        sh 'mix local.hex --force'
+        sh 'mix deps.get'
+        sh 'mix credo --ignore todo'
+        sh 'MIX_ENV=test mix do ecto.setup, test'
+        sh 'mix dialyzer'
+      }
+    }
+  }
+  post {
+    always {
+      script {
+        try {
+          sh 'docker-compose --project-name velocity_portal down -v'
+          sh 'docker system prune --volumes -f'
+        }
+        catch (exc) {
+          echo 'A prune operation is already running'
+        }
+      }
+    }
+  }
+}
+
