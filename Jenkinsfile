@@ -10,7 +10,7 @@ pipeline {
                 stage('Stage 2') {
             steps {
                  echo 'ready to deploy'
-                 sh label: '', script: 'python manage.py runserver'
+//                  sh label: '', script: 'python manage.py runserver'
 
             }
         }
