@@ -99,9 +99,30 @@ pipeline {
 //             sh 'python manage.py test'
 
 
+                        script{
 
-               echo 'Testing..'
-               sh "./start.sh"
+                               def testsError = null
+                                    try {
+                                      sh "./start.sh"
+
+                                    }
+                                    catch(err) {
+                                        echo "error was found"
+                                        testsError = err
+                                        currentBuild.result = 'FAILURE'
+                                    }
+                                    finally {
+                                        junit 'reports/junit.xml'
+
+                                        if (testsError) {
+                                            throw testsError
+                                        }
+                                    }
+
+                        }
+
+//                echo 'Testing..'
+//                sh "./start.sh"
 // //                sh 'docker-compose run web sh -c "python3 manage.py jenkins"'
 //                echo 'test completed....'
 //                 sh "start.sh"
@@ -115,27 +136,28 @@ pipeline {
         stage('Deploy') {
 
                     steps{
-                         echo 'Hello World'
-                        script{
-
-                               def testsError = null
-                                    try {
-                                      sh "./start.sh"
-
-                                    }
-                                    catch(err) {
-                                        testsError = err
-                                        currentBuild.result = 'FAILURE'
-                                    }
-                                    finally {
-                                        junit 'reports/junit.xml'
-
-                                        if (testsError) {
-                                            throw testsError
-                                        }
-                                    }
-
-                        }
+                         echo 'Hello deploy'
+//                         script{
+//
+//                                def testsError = null
+//                                     try {
+//                                       sh "./start.sh"
+//
+//                                     }
+//                                     catch(err) {
+//                                         echo "error was found"
+//                                         testsError = err
+//                                         currentBuild.result = 'FAILURE'
+//                                     }
+//                                     finally {
+//                                         junit 'reports/junit.xml'
+//
+//                                         if (testsError) {
+//                                             throw testsError
+//                                         }
+//                                     }
+//
+//                         }
 
 
                     }
