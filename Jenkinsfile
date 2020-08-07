@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'make'
+
             }
         }
         stage('Test') {
@@ -16,6 +16,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+
+
+                def username = 'Kangogo'
+                echo 'Hello Mr. ${username}'
+                echo "I said, Hello Mr. ${username}"
             }
         }
     }
