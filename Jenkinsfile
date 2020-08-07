@@ -2,16 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Stage 1') {
+        stage('Build') {
             steps {
-                echo 'hello thi is updated trigger'
+                echo 'Building..'
             }
         }
-                stage('Stage 2') {
+        stage('Test') {
             steps {
-                 echo 'ready to deploy'
-//                  sh label: '', script: 'python manage.py runserver'
-
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
