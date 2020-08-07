@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
 
-                echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "Building ${env.BUILD_ID} on ${env.JENKINS_URL} and job name ${env.JOB_NAME}"
 
 
             }
