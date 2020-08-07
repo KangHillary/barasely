@@ -98,6 +98,7 @@ pipeline {
             steps {
                echo 'Testing..'
                sh 'docker-compose run web sh -c "python3 manage.py jenkins"'
+               echo 'test completed..'
 //                 sh "start.sh"
 //                  sh '''
 //                         source bin/activate
