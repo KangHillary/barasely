@@ -7,5 +7,11 @@ pipeline {
                 echo 'hello thi is updated trigger'
             }
         }
+                stage('Stage 2') {
+            steps {
+                 echo 'ready to deploy'
+
+            }
+        }
     }
 }
