@@ -1,3 +1,4 @@
+pipeline {
 node {
     // It's often recommended to run a django project from a virtual environment.
     // This way you can manage all of your depedencies without affecting the rest of your system.
@@ -64,7 +65,7 @@ node {
         }
     }
 }
-
+}
 
 
 
