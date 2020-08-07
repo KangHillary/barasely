@@ -116,29 +116,29 @@ pipeline {
 
                     steps{
                          echo 'Hello World'
-                        script{
-
-                               def testsError = null
-                                    try {
-                                        sh '''
-
-                                            python manage.py jenkins
-
-                                           '''
-                                    }
-                                    catch(err) {
-                                        testsError = err
-                                        currentBuild.result = 'FAILURE'
-                                    }
-                                    finally {
-                                        junit 'reports/junit.xml'
-
-                                        if (testsError) {
-                                            throw testsError
-                                        }
-                                    }
-
-                        }
+//                         script{
+//
+//                                def testsError = null
+//                                     try {
+//                                         sh '''
+//
+//                                             python manage.py jenkins
+//
+//                                            '''
+//                                     }
+//                                     catch(err) {
+//                                         testsError = err
+//                                         currentBuild.result = 'FAILURE'
+//                                     }
+//                                     finally {
+//                                         junit 'reports/junit.xml'
+//
+//                                         if (testsError) {
+//                                             throw testsError
+//                                         }
+//                                     }
+//
+//                         }
 
 
                     }
