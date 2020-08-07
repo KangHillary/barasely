@@ -97,7 +97,7 @@ pipeline {
         stage('Test') {
             steps {
                echo 'Testing..'
-                sh "start.sh"
+//                 sh "start.sh"
 //                  sh '''
 //                         source bin/activate
 //                         pip install -r requirements.txt
@@ -117,6 +117,15 @@ pipeline {
         post {
         always {
             echo 'always here..'
+                  script {
+        try {
+          sh 'docker-compose --project-name credit_bank down -v'
+          sh 'docker system prune --volumes -f'
+        }
+        catch (exc) {
+          echo 'A prune operation is already running'
+        }
+      }
         }
         failure {
             echo 'failure here..'
