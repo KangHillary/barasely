@@ -109,7 +109,9 @@ pipeline {
             }
         }
         stage('Deploy') {
+
                     steps{
+                         echo 'Hello World'
                         script{
 
                                def testsError = null
