@@ -96,10 +96,8 @@ pipeline {
         }
         stage('Test') {
             steps {
+sh 'python --version'
 
-            sh label: '', script: '''#!/bin/sh
-            echo "Starting the tests ..."
-            python manage.py jenkins'''
 
 
 //                echo 'Testing..'
