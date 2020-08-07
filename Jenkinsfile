@@ -120,7 +120,7 @@ pipeline {
                   script {
         try {
           sh 'docker-compose --project-name credit_bank down -v'
-          sh 'docker system prune --volumes -f'
+//           sh 'docker system prune --volumes -f'
         }
         catch (exc) {
           echo 'A prune operation is already running'
