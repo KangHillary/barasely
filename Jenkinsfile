@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Stage 1') {
             steps {
-                echo 'Hello mr hillary!'
+                echo 'hello thi is updated trigger'
             }
         }
     }
